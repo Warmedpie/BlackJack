@@ -1,0 +1,12 @@
+# ninja log v5
+16	1118	7506457400674003	Blackjack/CMakeFiles/Blackjack.dir/Blackjack.cpp.obj	75f9e81c6cc13c25
+17	1121	7506459336821671	Blackjack/CMakeFiles/Blackjack.dir/Dealer.cpp.obj	2a4d33f0189c707f
+36	1404	7506428573259946	Blackjack/CMakeFiles/Blackjack.dir/Cards/Deck.cpp.obj	14ab9da3c5b0f192
+1122	1311	7506459338361668	Blackjack/Blackjack.exe	fadf363058d26ce4
+3	1301	7506461163003415	Blackjack/CMakeFiles/Blackjack.dir/Dealer.cpp.obj	2a4d33f0189c707f
+1302	1478	7506461164403407	Blackjack/Blackjack.exe	fadf363058d26ce4
+3	1051	7506462538548724	Blackjack/CMakeFiles/Blackjack.dir/Blackjack.cpp.obj	75f9e81c6cc13c25
+13	1105	7506462539088703	Blackjack/CMakeFiles/Blackjack.dir/Dealer.cpp.obj	2a4d33f0189c707f
+1105	1286	7506462540528711	Blackjack/Blackjack.exe	fadf363058d26ce4
+14	1065	7506463747518556	Blackjack/CMakeFiles/Blackjack.dir/Dealer.cpp.obj	2a4d33f0189c707f
+1066	1266	7506463749128580	Blackjack/Blackjack.exe	fadf363058d26ce4

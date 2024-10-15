@@ -1,0 +1,106 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Alden\\source\\repos\\Blackjack\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alden\\source\\repos\\Blackjack\\Blackjack\\Dealer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Blackjack\\Dealer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alden\\source\\repos\\Blackjack\\Blackjack\\Blackjack.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Blackjack\\Blackjack.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alden\\source\\repos\\Blackjack\\Blackjack\\Dealer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Blackjack\\Dealer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alden\\source\\repos\\Blackjack\\Blackjack\\Cards\\Deck.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Blackjack\\Cards\\Deck.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Alden\\source\\repos\\Blackjack\\Blackjack\\Cards\\Deck.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Blackjack\\Cards\\Deck.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Blackjack.cpp",
+              "DocumentMoniker": "C:\\Users\\Alden\\source\\repos\\Blackjack\\Blackjack\\Blackjack.cpp",
+              "RelativeDocumentMoniker": "Blackjack\\Blackjack.cpp",
+              "ToolTip": "C:\\Users\\Alden\\source\\repos\\Blackjack\\Blackjack\\Blackjack.cpp",
+              "RelativeToolTip": "Blackjack\\Blackjack.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACwAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-10-14T13:59:51.447Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Deck.cpp",
+              "DocumentMoniker": "C:\\Users\\Alden\\source\\repos\\Blackjack\\Blackjack\\Cards\\Deck.cpp",
+              "RelativeDocumentMoniker": "Blackjack\\Cards\\Deck.cpp",
+              "ToolTip": "C:\\Users\\Alden\\source\\repos\\Blackjack\\Blackjack\\Cards\\Deck.cpp",
+              "RelativeToolTip": "Blackjack\\Cards\\Deck.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADcAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-10-14T20:52:19.2Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Deck.h",
+              "DocumentMoniker": "C:\\Users\\Alden\\source\\repos\\Blackjack\\Blackjack\\Cards\\Deck.h",
+              "RelativeDocumentMoniker": "Blackjack\\Cards\\Deck.h",
+              "ToolTip": "C:\\Users\\Alden\\source\\repos\\Blackjack\\Blackjack\\Cards\\Deck.h",
+              "RelativeToolTip": "Blackjack\\Cards\\Deck.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-10-14T20:52:14.962Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Dealer.h",
+              "DocumentMoniker": "C:\\Users\\Alden\\source\\repos\\Blackjack\\Blackjack\\Dealer.h",
+              "RelativeDocumentMoniker": "Blackjack\\Dealer.h",
+              "ToolTip": "C:\\Users\\Alden\\source\\repos\\Blackjack\\Blackjack\\Dealer.h",
+              "RelativeToolTip": "Blackjack\\Dealer.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-10-14T14:01:23.076Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Dealer.cpp",
+              "DocumentMoniker": "C:\\Users\\Alden\\source\\repos\\Blackjack\\Blackjack\\Dealer.cpp",
+              "RelativeDocumentMoniker": "Blackjack\\Dealer.cpp",
+              "ToolTip": "C:\\Users\\Alden\\source\\repos\\Blackjack\\Blackjack\\Dealer.cpp",
+              "RelativeToolTip": "Blackjack\\Dealer.cpp",
+              "ViewState": "AgIAAGQAAAAAAAAAAAAAAH0AAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-10-14T14:14:20.426Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
