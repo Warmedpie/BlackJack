@@ -268,12 +268,15 @@ void Dealer::dealerAction() {
 	count[getValue(dealerHidden)]++;
 
 	int playerTotal = computeTotal(playerCards);
+	int split1Total = !split1.empty() ? computeTotal(split1) : 22;
+	int split2Total = !split2.empty() ? computeTotal(split2) : 22;
+	int split3Total = !split3.empty() ? computeTotal(split3) : 22;
 
 	//Draw the dealers cards and total
 	int dealerTotal = computeTotal(dealerCards);
 
 	//Hit until Dealer gets 17
-	while (dealerTotal < 17 && (playerTotal < 22 && split1.empty())) {
+	while (dealerTotal < 17 && (playerTotal < 22 || split1Total < 22 || split2Total < 22 || split3Total < 22)) {
 		//Draw a card
 		dealerCards.push_back(drawCard());
 
@@ -402,6 +405,9 @@ int Dealer::getValue(Card c) {
 	default:
 		break;
 	}
+
+
+	return 0;
 }
 
 int Dealer::computeTotal(std::vector<Card>& cards) {

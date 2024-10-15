@@ -6,6 +6,7 @@
 #include "Strategy/Strategy.h"
 #include "Strategy/BasicStrategy.h"
 #include "Strategy/HiLoCounter.h"
+#include "Strategy/BlackjackBot.h"
 #include <string>
 
 //Helper function for parsing text
@@ -41,7 +42,7 @@ int startingBet() {
 }
 
 //Display strategy according to the different advisors
-void displayStrategyInfo(Dealer& dealer, BasicStrategy& basicStrategyPlayer, HiLoCounter& cardCountingPlayer) {
+void displayStrategyInfo(Dealer& dealer, BasicStrategy& basicStrategyPlayer, HiLoCounter& cardCountingPlayer, BlackjackBot& botPlayer) {
     std::cout << "The running count is: " << dealer.runningCount() << " with a true count of " << dealer.trueCount() << std::endl;
 
     if (dealer.displayStrategyInfo()) {
@@ -50,6 +51,9 @@ void displayStrategyInfo(Dealer& dealer, BasicStrategy& basicStrategyPlayer, HiL
 
         Decision counter = cardCountingPlayer.getDecision(dealer.trueCount(), dealer.getPlayerTotal(), dealer.getDealerTotal(), dealer.playerIsSoft(), dealer.playerCanSplit());
         std::cout << "Card counting strategy says to: " << Strategy::decisionToString(counter) << std::endl;
+
+        Result bot = botPlayer.getDecision(dealer.getCount(), dealer.getPlayerTotal(), dealer.getDealerTotal(), dealer.playerIsSoft(), dealer.playerCanSplit());
+        std::cout << "Blackjack bot says to: " << Strategy::decisionToString(bot.d) << " with an expected value of: " << bot.ev * dealer.betSize << std::endl;
 
     }
     else {
@@ -65,6 +69,7 @@ int main() {
     //Create Strategy Advisors
     BasicStrategy basicStrategyPlayer;
     HiLoCounter cardCountingPlayer;
+    BlackjackBot botPlayer(6);
 
     //Set the bet size.
     dealer.betSize = startingBet();
@@ -78,7 +83,7 @@ int main() {
     while (true) {
         
         //Display the correct strategy
-        displayStrategyInfo(dealer, basicStrategyPlayer, cardCountingPlayer);
+        displayStrategyInfo(dealer, basicStrategyPlayer, cardCountingPlayer, botPlayer);
 
         //Fetch a command
         int cmd = getCommand();

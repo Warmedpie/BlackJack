@@ -67,6 +67,6 @@ int HiLoCounter::betSpread(float trueCount) {
 
 	if (TC <= 0) return baseBet;
 
-	return TC * baseBet;
+	return (TC + 1) * baseBet;
 
 }

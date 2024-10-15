@@ -112,6 +112,13 @@ build Blackjack\CMakeFiles\Blackjack.dir\Strategy\HiLoCounter.cpp.obj: CXX_COMPI
   TARGET_COMPILE_PDB = Blackjack\CMakeFiles\Blackjack.dir\
   TARGET_PDB = Blackjack\Blackjack.pdb
 
+build Blackjack\CMakeFiles\Blackjack.dir\Strategy\BlackjackBot.cpp.obj: CXX_COMPILER__Blackjack_unscanned_Debug C$:\Users\Alden\OneDrive\Documents\GitHub\Blackjack\Blackjack\Strategy\BlackjackBot.cpp || cmake_object_order_depends_target_Blackjack
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Ob0 /Od /RTC1 -std:c++20 -ZI
+  OBJECT_DIR = Blackjack\CMakeFiles\Blackjack.dir
+  OBJECT_FILE_DIR = Blackjack\CMakeFiles\Blackjack.dir\Strategy
+  TARGET_COMPILE_PDB = Blackjack\CMakeFiles\Blackjack.dir\
+  TARGET_PDB = Blackjack\Blackjack.pdb
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Blackjack
@@ -120,7 +127,7 @@ build Blackjack\CMakeFiles\Blackjack.dir\Strategy\HiLoCounter.cpp.obj: CXX_COMPI
 #############################################
 # Link the executable Blackjack\Blackjack.exe
 
-build Blackjack\Blackjack.exe: CXX_EXECUTABLE_LINKER__Blackjack_Debug Blackjack\CMakeFiles\Blackjack.dir\Blackjack.cpp.obj Blackjack\CMakeFiles\Blackjack.dir\Dealer.cpp.obj Blackjack\CMakeFiles\Blackjack.dir\Cards\Deck.cpp.obj Blackjack\CMakeFiles\Blackjack.dir\Strategy\BasicStrategy.cpp.obj Blackjack\CMakeFiles\Blackjack.dir\Strategy\HiLoCounter.cpp.obj
+build Blackjack\Blackjack.exe: CXX_EXECUTABLE_LINKER__Blackjack_Debug Blackjack\CMakeFiles\Blackjack.dir\Blackjack.cpp.obj Blackjack\CMakeFiles\Blackjack.dir\Dealer.cpp.obj Blackjack\CMakeFiles\Blackjack.dir\Cards\Deck.cpp.obj Blackjack\CMakeFiles\Blackjack.dir\Strategy\BasicStrategy.cpp.obj Blackjack\CMakeFiles\Blackjack.dir\Strategy\HiLoCounter.cpp.obj Blackjack\CMakeFiles\Blackjack.dir\Strategy\BlackjackBot.cpp.obj
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Ob0 /Od /RTC1 -ZI
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
