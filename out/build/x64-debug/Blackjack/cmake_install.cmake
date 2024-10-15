@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/Alden/source/repos/Blackjack/Blackjack
+# Install script for directory: C:/Users/Alden/OneDrive/Documents/GitHub/Blackjack/Blackjack
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Users/Alden/source/repos/Blackjack/out/install/x64-debug")
+  set(CMAKE_INSTALL_PREFIX "C:/Users/Alden/OneDrive/Documents/GitHub/Blackjack/out/install/x64-debug")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 

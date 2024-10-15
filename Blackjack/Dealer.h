@@ -2,20 +2,28 @@
 #include "Cards/Card.h"
 #include "Cards/Deck.h"
 #include <string>
+#include <unordered_map>
 
 class Dealer {
 
 private:
+
+	//Card information
 	Deck deck;
 	std::vector<Card> playerCards;
 	std::vector<Card> dealerCards;
 	Card dealerHidden;
+
+	//Card counting information
+	//Given a value, show the amount of cards that have been delt (TJQK => 10, A => 11)
+	std::unordered_map<int, int> count;
+
+	//Game information
 	bool isAction = false;
 	int numberOfDecks;
 	
-	//4 hand split max
+	//Split information (4 hand split max)
 	int splitIndex = 0;
-
 	int betSize0;
 	std::vector<Card> split1;
 	int betSize1;
@@ -24,7 +32,7 @@ private:
 	std::vector<Card> split3;
 	int betSize3;
 
-	//$
+	//Money
 	int playerMoney = 2000;
 
 public:
@@ -53,5 +61,40 @@ public:
 
 	//the amount wagered per bet
 	int betSize = 0;
+
+	//Draw card from the deck, and then update the counting information
+	Card drawCard();
+
+	//Get the Running count
+	int runningCount();
+
+	//Get the true count
+	float trueCount();
+
+	//Get the count information
+	inline std::unordered_map<int, int> getCount() {
+		return count;
+	}
+
+	//Get the player total
+	inline int getPlayerTotal() {
+		return computeTotal(playerCards);
+	}
+
+	//see if total is soft
+	bool playerIsSoft();
+
+	//Get the dealer total
+	inline int getDealerTotal() {
+		return computeTotal(dealerCards);
+	}
+
+	inline bool playerCanSplit() {
+		return playerCards.size() == 2 && getValue(playerCards[0]) == getValue(playerCards[1]) && splitIndex < 4 && playerMoney >= betSize0;
+	}
+
+	inline bool displayStrategyInfo() {
+		return isAction;
+	}
 
 };

@@ -3,8 +3,14 @@
 Dealer::Dealer(int numberOfDecks) {
 	this->numberOfDecks = numberOfDecks;
 
+	for (int i = 2; i < 12; i++) {
+		count[i] = 0;
+	}
+
 	deck.shuffle(numberOfDecks);
 }
+
+//Game Logic
 
 void Dealer::reshuffle() {
 	deck.shuffle(numberOfDecks);
@@ -19,6 +25,11 @@ void Dealer::deal() {
 	if (deck.remaining() <= 0.25) {
 		std::cout << "RESHUFFLE" << std::endl;
 		deck.shuffle(numberOfDecks);
+
+		for (int i = 2; i < 12; i++) {
+			count[i] = 0;
+		}
+
 	}
 
 	//Clear the player and dealer cards
@@ -29,11 +40,11 @@ void Dealer::deal() {
 	split3.clear();
 
 	//Player starts with two cards
-	playerCards.push_back(deck.drawCard());
-	playerCards.push_back(deck.drawCard());
+	playerCards.push_back(drawCard());
+	playerCards.push_back(drawCard());
 
 	//Dealer starts with one card
-	dealerCards.push_back(deck.drawCard());
+	dealerCards.push_back(drawCard());
 	dealerHidden = deck.drawCard();
 
 	//This specifies if the player has action
@@ -41,7 +52,7 @@ void Dealer::deal() {
 	splitIndex = 0;
 
 	std::vector<Card> tempDealer = { dealerCards[0], dealerHidden };
-	if (computeTotal(tempDealer) == 21) {
+	if (dealerCards[0].rank != ACE && computeTotal(tempDealer) == 21) {
 		isAction = false;
 		dealerCards.push_back(dealerHidden);
 	}
@@ -108,10 +119,12 @@ void Dealer::display() {
 		std::cout << "1) Hit" << std::endl << std::endl;
 		std::cout << "2) Stand" << std::endl << std::endl;
 
-		if (playerCards.size() == 2 && getValue(playerCards[0]) == getValue(playerCards[1]) && splitIndex < 4)
+		if (playerCanSplit())
 			std::cout << "3) Split" << std::endl << std::endl;
 		if (playerCards.size() == 2)
 			std::cout << "4) Double Down" << std::endl << std::endl;
+		if (playerCards.size() == 2 && dealerCards[0].rank == ACE)
+			std::cout << "5) Insurance?" << std::endl << std::endl;
 	}
 
 	else {
@@ -128,9 +141,16 @@ void Dealer::action(int cmd) {
 		return;
 	}
 
-	if (cmd == 1) {
+	//Guard for blackjack
+	if (cmd != 5 && dealerCards[0].rank == ACE && getValue(dealerHidden) == 10) {
+		//Dealer plays
+		isAction = false;
+		dealerAction();
+	}
+
+	else if (cmd == 1) {
 		//get a card
-		playerCards.push_back(deck.drawCard());
+		playerCards.push_back(drawCard());
 
 		if (computeTotal(playerCards) >= 21) {
 			//Dealer plays
@@ -145,11 +165,11 @@ void Dealer::action(int cmd) {
 		dealerAction();
 	}
 
-	else if (cmd == 3 && playerCards.size() == 2 && getValue(playerCards[0]) == getValue(playerCards[1]) && splitIndex < 4 && playerMoney >= betSize0) {
+	else if (cmd == 3 && playerCanSplit()) {
 		if (splitIndex == 0) {
 			split1.push_back(playerCards[1]);
 			playerCards.pop_back();
-			playerCards.push_back(deck.drawCard());
+			playerCards.push_back(drawCard());
 			splitIndex++;
 
 			betSize1 = betSize;
@@ -158,7 +178,7 @@ void Dealer::action(int cmd) {
 		else if (splitIndex == 1) {
 			split2.push_back(playerCards[1]);
 			playerCards.pop_back();
-			playerCards.push_back(deck.drawCard());
+			playerCards.push_back(drawCard());
 			splitIndex++;
 
 			betSize2 = betSize;
@@ -167,7 +187,7 @@ void Dealer::action(int cmd) {
 		else if (splitIndex == 2) {
 			split3.push_back(playerCards[1]);
 			playerCards.pop_back();
-			playerCards.push_back(deck.drawCard());
+			playerCards.push_back(drawCard());
 			splitIndex++;
 
 			betSize3 = betSize;
@@ -177,7 +197,7 @@ void Dealer::action(int cmd) {
 
 	else if (cmd == 4 && playerCards.size() == 2) {
 		//Get a card
-		playerCards.push_back(deck.drawCard());
+		playerCards.push_back(drawCard());
 
 		playerMoney -= betSize;
 		betSize *= 2;
@@ -185,6 +205,17 @@ void Dealer::action(int cmd) {
 		//Dealer plays
 		isAction = false;
 		dealerAction();
+	}
+
+	else if (cmd == 5 && playerCards.size() == 2 && dealerCards[0].rank == ACE) {
+		playerMoney -= (betSize / 2);
+
+		if (getValue(dealerHidden) == 10) {
+			playerMoney += betSize;
+			isAction = false;
+			dealerAction();
+		}
+
 	}
 }
 
@@ -194,7 +225,7 @@ void Dealer::dealerAction() {
 		std::vector<Card> temp = playerCards;
 		playerCards = split1;
 		split1 = temp;
-		playerCards.push_back(deck.drawCard());
+		playerCards.push_back(drawCard());
 
 		int tempSize = betSize;
 		betSize = betSize1;
@@ -208,7 +239,7 @@ void Dealer::dealerAction() {
 		std::vector<Card> temp = playerCards;
 		playerCards = split2;
 		split2 = temp;
-		playerCards.push_back(deck.drawCard());
+		playerCards.push_back(drawCard());
 
 		int tempSize = betSize;
 		betSize = betSize2;
@@ -222,7 +253,7 @@ void Dealer::dealerAction() {
 		std::vector<Card> temp = playerCards;
 		playerCards = split3;
 		split3 = temp;
-		playerCards.push_back(deck.drawCard());
+		playerCards.push_back(drawCard());
 
 		int tempSize = betSize;
 		betSize = betSize3;
@@ -234,22 +265,17 @@ void Dealer::dealerAction() {
 
 	//Check player total.
 	dealerCards.push_back(dealerHidden);
+	count[getValue(dealerHidden)]++;
+
 	int playerTotal = computeTotal(playerCards);
-
-	if (playerTotal > 21) {
-		//Draw a card
-		dealerCards.push_back(deck.drawCard());
-
-		return;
-	}
 
 	//Draw the dealers cards and total
 	int dealerTotal = computeTotal(dealerCards);
 
 	//Hit until Dealer gets 17
-	while (dealerTotal < 17 && (playerTotal < 22 || !split1.empty())) {
+	while (dealerTotal < 17 && (playerTotal < 22 && split1.empty())) {
 		//Draw a card
-		dealerCards.push_back(deck.drawCard());
+		dealerCards.push_back(drawCard());
 
 		//Compute total
 		dealerTotal = computeTotal(dealerCards);
@@ -329,6 +355,8 @@ void Dealer::dealerAction() {
 
 }
 
+//Value logic
+
 int Dealer::getValue(Card c) {
 	switch (c.rank) {
 
@@ -397,4 +425,55 @@ int Dealer::computeTotal(std::vector<Card>& cards) {
 	}
 
 	return total;
+}
+
+
+//Card counting functions
+Card Dealer::drawCard() {
+	Card c = this->deck.drawCard();
+
+	count[getValue(c)]++;
+
+	return c;
+}
+
+int Dealer::runningCount() {
+	return count[2] + count[3] + count[4] + count[5] + count[6] - count[10] - count[11];
+}
+
+float Dealer::trueCount() {
+
+	float remainingDecks = numberOfDecks * deck.remaining();
+
+	return runningCount() / remainingDecks;
+
+}
+
+//Strategy Logic
+bool Dealer::playerIsSoft() {
+
+	//We use two bools to track if we have already converted an ACE to a 1, and one to keep track if we currently have an 11 valued ace
+	bool soft = false;
+	bool alreadySoft = false;
+
+	//Total to check if we went over 21 (making our total non-soft)
+	int total = 0;
+
+	//Loop logic
+	for (int i = 0; i < playerCards.size(); i++) {
+
+		total += getValue(playerCards[i]);
+
+		if (!alreadySoft && playerCards[i].rank == ACE)
+			soft = true;
+
+		if (soft && total > 21) {
+			total -= 10;
+			soft = false;
+			alreadySoft = true;
+		}
+
+	}
+
+	return soft;
 }
