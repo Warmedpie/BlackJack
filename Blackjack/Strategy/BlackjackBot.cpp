@@ -11,7 +11,11 @@ Result BlackjackBot::getDecision(std::unordered_map<int, int> count, int playerT
 	int lowCount = 0;
 	int highCount = 0;
 
-	std::unordered_map<int, int> odds;
+	std::map<int, int> odds;
+
+	for (int i = 0; i < 12; i++) {
+		odds[i] = 0;
+	}
 
 	//See how many cards that can't bust us are left in the deck
 	for (int i = 2; i <= std::min(10, highestNonBust); i++) {
@@ -79,7 +83,7 @@ Result BlackjackBot::getDecision(std::unordered_map<int, int> count, int playerT
 
 }
 
-float BlackjackBot::EVOfDouble(std::unordered_map<int, int>& odds, int playerTotal, int dealerTotal, int amountOfCardsRemain) {
+float BlackjackBot::EVOfDouble(std::map<int, int>& odds, int playerTotal, int dealerTotal, int amountOfCardsRemain) {
 	//We must compute the odds if the dealer needs another hit
 	float averageEV = 0;
 	for (int i = 2; i < 11; i++) {
@@ -96,7 +100,7 @@ float BlackjackBot::EVOfDouble(std::unordered_map<int, int>& odds, int playerTot
 
 }
 
-float BlackjackBot::EVOfHit(std::unordered_map<int, int>& odds, int playerTotal, int dealerTotal, int amountOfCardsRemain) {
+float BlackjackBot::EVOfHit(std::map<int, int>& odds, int playerTotal, int dealerTotal, int amountOfCardsRemain) {
 
 	if (playerTotal > 21)
 		return -1;
@@ -144,7 +148,7 @@ float BlackjackBot::EVOfHit(std::unordered_map<int, int>& odds, int playerTotal,
 
 }
 
-float BlackjackBot::EVOfStand(std::unordered_map<int, int>& odds, int playerTotal, int dealerTotal, int amountOfCardsRemain) {
+float BlackjackBot::EVOfStand(std::map<int, int>& odds, int playerTotal, int dealerTotal, int amountOfCardsRemain) {
 	
 	//over 21 we lose
 	if (playerTotal > 21)
@@ -195,20 +199,15 @@ float BlackjackBot::EVOfStand(std::unordered_map<int, int>& odds, int playerTota
 	
 }
 
-float BlackjackBot::averageDealerTotal(std::unordered_map<int, int>& odds, int dealerTotal, int amountOfCardsRemain) {
-	//Over 16 = stand, guard
-	if (dealerTotal >= 17)
-		return dealerTotal;
+int BlackjackBot::betSpread(std::unordered_map<int, int> count, float remaining) {
+	int TC = (count[2] + count[3] + count[4] + count[5] + count[6] - count[10] - count[11]) / (numberOfDecks * remaining);
+	
+	if (TC < -1) return 0;
+	if (TC == -1) return baseBet / 2;
+	if (TC == 0) return baseBet;
+	if (TC == 1) return baseBet * 5;
+	if (TC == 2) return baseBet * 10;
+	if (TC == 3) return baseBet * 20;
 
-	float average = 0;
-	for (int i = 2; i <= 11; i++) {
-		odds[i] -= 1;
-		float averageAfterHit = averageDealerTotal(odds, dealerTotal + i, amountOfCardsRemain - 1);
-		odds[i] += 1;
-		average += averageAfterHit * (float)odds[i];
-	}
-
-	average /= amountOfCardsRemain;
-
-	return average;
+	return 35 * baseBet;
 }

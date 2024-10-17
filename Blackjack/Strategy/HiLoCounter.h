@@ -9,7 +9,7 @@ private:
 	
 
 public:
-	Decision getDecision(float trueCount, int playerTotal, int dealerTotal, bool playerIsSoft, bool canSplit);
+	Decision getDecision(float trueCount, int playerTotal, int dealerTotal, bool playerIsSoft, bool canSplit, bool canInsure);
 
 	int baseBet = 0;
 	int betSpread(float trueCount);

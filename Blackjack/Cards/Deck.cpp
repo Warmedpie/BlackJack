@@ -1,9 +1,7 @@
 #include "Deck.h"
 
 Deck::Deck() {
-
-	std::mt19937 rng(time(NULL));
-	seed = &rng;
+	srand(time(NULL));
 
 	shuffle();
 }
@@ -40,11 +38,8 @@ void Deck::shuffle(int numberOfDecks) {
 
 Card Deck::drawCard() {
 
-	//Distribution for RNG
-	std::uniform_int_distribution<> dist(0, d.size() - 1);
-
-	//Get an index in the list
-	int index = dist(*seed);
+	//Get a random index
+	int index = rand() % d.size();
 
 	//Draw the card
 	Card c = d[index];

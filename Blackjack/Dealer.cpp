@@ -13,24 +13,19 @@ Dealer::Dealer(int numberOfDecks) {
 //Game Logic
 
 void Dealer::reshuffle() {
+
+	count.clear();
+	for (int i = 0; i < 13; i++) {
+		count[i] = 0;
+	}
+
 	deck.shuffle(numberOfDecks);
 }
 
 void Dealer::deal() {
+
 	betSize0 = betSize;
 	playerMoney -= betSize;
-
-	//Check for reshuffle need
-	//Deck penetration will be set to 75%, modify this line to change.
-	if (deck.remaining() <= 0.25) {
-		std::cout << "RESHUFFLE" << std::endl;
-		deck.shuffle(numberOfDecks);
-
-		for (int i = 2; i < 12; i++) {
-			count[i] = 0;
-		}
-
-	}
 
 	//Clear the player and dealer cards
 	playerCards.clear();
@@ -49,6 +44,7 @@ void Dealer::deal() {
 
 	//This specifies if the player has action
 	isAction = true;
+	canInsurance = true;
 	splitIndex = 0;
 
 	std::vector<Card> tempDealer = { dealerCards[0], dealerHidden };
@@ -195,6 +191,7 @@ void Dealer::action(int cmd) {
 		}
 	}
 
+
 	else if (cmd == 4 && playerCards.size() == 2) {
 		//Get a card
 		playerCards.push_back(drawCard());
@@ -207,9 +204,22 @@ void Dealer::action(int cmd) {
 		dealerAction();
 	}
 
-	else if (cmd == 5 && playerCards.size() == 2 && dealerCards[0].rank == ACE) {
+	//if double is attempted when can't, just hit
+	else if (cmd == 4) {
+		//get a card
+		playerCards.push_back(drawCard());
+
+		if (computeTotal(playerCards) >= 21) {
+			//Dealer plays
+			isAction = false;
+			dealerAction();
+		}
+	}
+
+	else if (cmd == 5 && playerCards.size() == 2 && dealerCards[0].rank == ACE && canInsurance) {
 		playerMoney -= (betSize / 2);
 
+		canInsurance = false;
 		if (getValue(dealerHidden) == 10) {
 			playerMoney += betSize;
 			isAction = false;
@@ -356,6 +366,12 @@ void Dealer::dealerAction() {
 
 	}
 
+	//Check for reshuffle need
+	//Deck penetration will be set to 75%, modify this line to change.
+	if (deck.remaining() <= 0.25) {
+		reshuffle();
+	}
+
 }
 
 //Value logic
@@ -436,8 +452,8 @@ int Dealer::computeTotal(std::vector<Card>& cards) {
 
 //Card counting functions
 Card Dealer::drawCard() {
-	Card c = this->deck.drawCard();
 
+	Card c = deck.drawCard();
 	count[getValue(c)]++;
 
 	return c;

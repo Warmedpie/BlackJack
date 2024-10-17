@@ -1,10 +1,10 @@
 #include "HiLoCounter.h"
 
 
-Decision HiLoCounter::getDecision(float trueCount, int playerTotal, int dealerTotal, bool playerIsSoft, bool canSplit) {
+Decision HiLoCounter::getDecision(float trueCount, int playerTotal, int dealerTotal, bool playerIsSoft, bool canSplit, bool canInsure) {
 	
 	//Take insurance at TC +3 or higher
-	if (dealerTotal == 11 && trueCount >= 3) return INSURANCE;
+	if (canInsure && dealerTotal == 11 && trueCount >= 3) return INSURANCE;
 
 	//Only hit 16 on negative counts
 	if (!playerIsSoft && playerTotal == 16 && dealerTotal == 10 && trueCount > 0) return STAND;
@@ -65,8 +65,13 @@ int HiLoCounter::betSpread(float trueCount) {
 
 	int TC = (int)trueCount;
 
-	if (TC <= 0) return baseBet;
+	if (TC < -1) return 0;
+	if (TC == -1) return baseBet / 2;
+	if (TC == 0) return baseBet;
+	if (TC == 1) return baseBet * 5;
+	if (TC == 2) return baseBet * 10;
+	if (TC == 3) return baseBet * 20;
 
-	return (TC + 1) * baseBet;
+	return 35 * baseBet;
 
 }

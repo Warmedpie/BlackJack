@@ -1,7 +1,6 @@
 #pragma once
 #include "Card.h"
 #include <vector>
-#include <random>
 #include <ctime>
 #include <iostream>
 
@@ -9,7 +8,6 @@ class Deck {
 
 private:
 	std::vector<Card> d;
-	std::mt19937* seed;
 	int numberOfDecks;
 
 public:
@@ -25,4 +23,9 @@ public:
 
 	//returns the amount of the shoe remaining.
 	float remaining();
+
+	//returns size
+	inline int size() {
+		return d.size();
+	}
 };

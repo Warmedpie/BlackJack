@@ -162,7 +162,7 @@ BasicStrategy::BasicStrategy() {
 	}
 
 	for (int pT = 13; pT <= 16; pT++) {
-		for (int dT = 6; dT <= 11; dT++) {
+		for (int dT = 7; dT <= 11; dT++) {
 			strategy[{pT, dT}] = HIT;
 		}
 	}

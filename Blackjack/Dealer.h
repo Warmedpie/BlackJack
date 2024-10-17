@@ -33,7 +33,10 @@ private:
 	int betSize3;
 
 	//Money
-	int playerMoney = 2000;
+	float playerMoney = 100000;
+
+	//Can insurance? player can only take insurance once
+	bool canInsurance = true;
 
 public:
 
@@ -90,11 +93,27 @@ public:
 	}
 
 	inline bool playerCanSplit() {
-		return playerCards.size() == 2 && getValue(playerCards[0]) == getValue(playerCards[1]) && splitIndex < 4 && playerMoney >= betSize0;
+		return playerCards.size() == 2 && getValue(playerCards[0]) == getValue(playerCards[1]) && splitIndex < 3 && playerMoney >= betSize0;
 	}
 
 	inline bool displayStrategyInfo() {
 		return isAction;
+	}
+
+	inline void resetBal() {
+		playerMoney = 100000;
+	}
+
+	inline int getBal() {
+		return playerMoney;
+	}
+
+	inline bool playerCanAcceptInsurance() {
+		return canInsurance && (playerCards.size() == 2);
+	}
+
+	inline float getRemainingDecks() {
+		return deck.remaining();
 	}
 
 };

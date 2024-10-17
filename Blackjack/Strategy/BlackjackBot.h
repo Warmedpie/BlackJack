@@ -25,10 +25,11 @@ public:
 	BlackjackBot(int numberOfDecks);
 
 	Result getDecision(std::unordered_map<int, int> count, int playerTotal, int dealerTotal, bool playerIsSoft, bool canSplit);
-	float averageDealerTotal(std::unordered_map<int, int>& odds, int dealerTotal, int amountOfCardsRemain);
 
-	float EVOfHit(std::unordered_map<int, int>& odds, int playerTotal, int dealerTotal, int amountOfCardsRemain);
-	float EVOfDouble(std::unordered_map<int, int>& odds, int playerTotal, int dealerTotal, int amountOfCardsRemain);
-	float EVOfStand(std::unordered_map<int, int>& odds, int playerTotal, int dealerTotal, int amountOfCardsRemain);
+	float EVOfHit(std::map<int, int>& odds, int playerTotal, int dealerTotal, int amountOfCardsRemain);
+	float EVOfDouble(std::map<int, int>& odds, int playerTotal, int dealerTotal, int amountOfCardsRemain);
+	float EVOfStand(std::map<int, int>& odds, int playerTotal, int dealerTotal, int amountOfCardsRemain);
 
+	int baseBet = 0;
+	int betSpread(std::unordered_map<int, int> count, float remaining);
 };
