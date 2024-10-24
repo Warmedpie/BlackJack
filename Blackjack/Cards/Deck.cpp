@@ -44,7 +44,7 @@ Card Deck::drawCard() {
 	//Draw the card
 	Card c = d[index];
 	d.erase(d.begin() + index);
-
+	
 	return c;
 }
 

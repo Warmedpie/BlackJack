@@ -430,19 +430,17 @@ int Dealer::computeTotal(std::vector<Card>& cards) {
 
 	int total = 0;
 
-	//We use two bools to track if we have already converted an ACE to a 1, and one to keep track if we currently have an 11 valued ace
+	//Keep track if the total is soft
 	bool soft = false;
-	bool alreadySoft = false;
 	for (int i = 0; i < cards.size(); i++) {
 		total += getValue(cards[i]);
 
-		if (!alreadySoft && cards[i].rank == ACE)
+		if (cards[i].rank == ACE)
 			soft = true;
 
 		if (soft && total > 21) {
 			total -= 10;
 			soft = false;
-			alreadySoft = true;
 		}
 	}
 
@@ -474,9 +472,8 @@ float Dealer::trueCount() {
 //Strategy Logic
 bool Dealer::playerIsSoft() {
 
-	//We use two bools to track if we have already converted an ACE to a 1, and one to keep track if we currently have an 11 valued ace
+	//Keep track if the total is soft
 	bool soft = false;
-	bool alreadySoft = false;
 
 	//Total to check if we went over 21 (making our total non-soft)
 	int total = 0;
@@ -486,13 +483,12 @@ bool Dealer::playerIsSoft() {
 
 		total += getValue(playerCards[i]);
 
-		if (!alreadySoft && playerCards[i].rank == ACE)
+		if (playerCards[i].rank == ACE)
 			soft = true;
 
 		if (soft && total > 21) {
 			total -= 10;
 			soft = false;
-			alreadySoft = true;
 		}
 
 	}
